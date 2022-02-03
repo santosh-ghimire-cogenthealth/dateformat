@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Helpers\DateHelper;
+use Carbon\Carbon;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+
     }
 
     /**
@@ -23,6 +25,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $this->app->singleton(DateHelper::class, function($app) {
+            return new DateHelper($app->make(Carbon::class));
+        });
     }
 }
