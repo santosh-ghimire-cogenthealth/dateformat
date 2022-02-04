@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\DateHelper;
 use App\Http\Requests\DateRequest;
+use App\Http\Requests\TimeZoneRequest;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Request as FacadesRequest;
@@ -93,14 +94,14 @@ class DateController extends Controller
      * @param Request $request data types date format and strings
      * @return  responseJson int|string
      */
-    public function compareTimeZone(DateRequest $request)
+    public function compareTimeZone(TimeZoneRequest $request)
     {
         try{
-            $diffNumber = $this->dateHelper->timeZoneComparasion($request->date1, $request->date2, $request->format);
+            $diffNumber = $this->dateHelper->timeZoneComparasion($request->timezone1, $request->timezone2, $request->time, $request->format);
         }catch(Exception $e){
             return response(['error' => $e->getMessage(), ], 200);
         }
-        return response(['formated_date' => $diffNumber, 'format' => $request->format],200);
+        return response(['timezone_compare' => $diffNumber, 'format' => !is_null($request->format) ? $request->format : 'Hours' ],200);
 
     }
 
