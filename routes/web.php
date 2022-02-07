@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::middleware(['local.env:123'])->group(function(){
+    Route::get('/', function () {
+        return view('welcome');
+    });
+
 });

@@ -50,6 +50,6 @@ class DateHelperTest extends TestCase
             'time' => '2020-11-1',
             'format' => 'seconds',
         ]);
-    $response->assertStatus(200);
+        $response->assertStatus(200);
     }
 }
